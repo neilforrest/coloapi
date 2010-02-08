@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<X3D profile='H3DAPI' version='1.3'>
+  <head>
+    <meta name='title' content='MirroredARTracking.x3d'/>
+    <meta name='description' content='This demo defines a mirrored colocation display by defining 3 corners of the actual display
+						  and 3 corners of the mirror.
+						  Adjust corners of display and mirror and camera position to match your measurements.
+						  NOTE 1: Working directory must be the same as that containing this file!
+						  NOTE 2: The "Mirror in Y" option should be enabled in the viewer.'/>
+  </head>
+  <Scene>
+
+	<!-- Import additional H3D nodes from ColoAPI -->
+	<ImportLibrary library="..\\bin\\ColoAPI" />
+	<ImportLibrary library="../bin/ColoAPI.so" />
+
+	<!-- Define tracking cameras used -->
+	<CameraInfo>
+		<!-- Camera placed on monitor base angled looking down monitor up-vector -->
+		<ARToolKitCamera position='0 0.69 0.02 ' orientation='6.86043e-009 0.987607 0.156948 3.14159' />
+	</CameraInfo>
+
+	<!-- Define properties of viewpoint -->
+	<MarkerViewpoint>
+
+		<!-- The ARToolkit marker used for tracking head position -->
+		<ARToolKitMarker />
+	
+		<!-- Properties of the graphic display -->
+		<!-- A ColocationMirroredDisplay calculates the 'virtual' display -->
+		<!-- properties from a real display and mirror -->
+		<ColocationMirroredDisplay>
+
+			<!-- Properties of the real graphic display -->
+			<ColocationDisplay 	topLeft='-0.225 0.43 0.225'
+				 			topRight='0.225 0.43 0.225'
+				 			bottomRight='0.225 0.555 -0.075' />
+
+			<!-- Properties of the mirror -->
+			<Mirror 	topLeft='-0.245 0.31 -0.075' 
+				 	topRight='0.245 0.31 -0.075'
+				 	bottomRight='0.245 0.235 0.20' />
+
+		</ColocationMirroredDisplay>
+
+	</MarkerViewpoint>
+
+	<!-- Import model -->
+	<Inline url="./fish/Kumanomi.x3d" />
+
+	<!-- Prepare environment for head tracking viewpoint -->
+	<!-- e.g. Disable followViewpoint on all haptic devices -->
+	<PythonScript url="initColo.py" />
+
+  </Scene>
+</X3D>

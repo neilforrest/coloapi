@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<X3D profile='H3DAPI' version='1.3'>
+  <head>
+    <meta name='title' content='FixedViewpoint.x3d'/>
+    <meta name='description' content='This demo uses a fixed viewing position (not tracked by ARToolkit or other) and the graphics are rendered
+						  based on this specified position and the specified parameters of the display (and mirror, if present).
+						  This demo should function without ARToolkit installed.'/>
+  </head>
+  <Scene>
+
+	<!-- Import additional H3D nodes from ColoAPI -->
+	<ImportLibrary library="..\\bin\\ColoAPI" />
+	<ImportLibrary library="../bin/ColoAPI.so" />
+
+	<!-- Define properties of viewpoint -->
+	<!-- Edit viewpoint position to match viewer eye position (measured in m from centre of display -->
+	<ColocationViewpoint position='0 0 0.6'>
+
+		<!-- Properties of the graphic display -->
+		<!-- Edit coords of 3 corners of monitor (measured in m from centre of monitor) -->
+		<ColocationDisplay 	topLeft='-0.165 0.105 0'
+			 			topRight='0.165 0.105 0'
+			 			bottomRight='0.165 -0.105 0' />
+
+		<!-- Could use mirrored display here instead -->
+
+	</ColocationViewpoint>
+
+	<!-- Import model -->
+	<Inline url="./fish/Kumanomi.x3d" />
+
+	<!-- Prepare environment for head tracking viewpoint -->
+	<!-- e.g. Disable followViewpoint on all haptic devices -->
+	<PythonScript url="initColo.py" />
+
+  </Scene>
+</X3D>

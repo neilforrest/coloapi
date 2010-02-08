@@ -35,7 +35,7 @@
 
 /// Undef if you do not have ARToolkit(http://www.hitl.washington.edu/artoolkit/) installed.
 /// Required for viewpoint headtracking via ARToolkit.
-#define HAVE_ARTOOLKIT
+/* #undef HAVE_ARTOOLKIT */
 
 #include <H3D/LibraryInfo.h>
 

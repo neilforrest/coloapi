@@ -12,7 +12,7 @@
 	<!-- Import additional H3D nodes from ColoAPI -->
 	<ImportLibrary library="..\\bin\\ColoAPI" />			<!-- Windows -->
 	<ImportLibrary library="../lib/libColoAPI.dylib" />		<!-- MacOSX -->
-	<ImportLibrary library="../bin/ColoAPI.so" />			<!-- Linux/Unix -->
+	<ImportLibrary library="../lib/libColoAPI.so" />		<!-- Linux/Unix -->
 
 	<!-- Define tracking cameras used -->
 	<CameraInfo>

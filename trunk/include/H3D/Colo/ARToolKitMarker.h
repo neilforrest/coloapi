@@ -9,8 +9,8 @@
 
 namespace H3D
 {
-	/// Represents a trackable marker in the ARToolKit
-	/// To enable tracking there must be one or more active instances of ARToolKitCamera
+	/// \brief Represents a trackable marker in the ARToolKit
+	/// \details To enable tracking there must be one or more active instances of ARToolKitCamera
 	class COLO_API ARToolKitMarker : public H3DMarker 
 	{
 	public:

@@ -7,8 +7,8 @@
 
 namespace H3D
 {
-	/// Represents a fintite square plane
-	/// A common base class for nodes that represent a plane, providing a mechanism to calculate
+	/// \brief Represents a fintite square plane
+	/// \details A common base class for nodes that represent a plane, providing a mechanism to calculate
 	/// the normal and up vectors and 4th corner based on the provision of 3 points/corners
 	class COLO_API Plane : public X3DNode
 	{

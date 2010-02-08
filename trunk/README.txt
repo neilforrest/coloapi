@@ -19,17 +19,27 @@ Requirements
 Compilation
 -----------
 
- * Generate build files using CMake, e.g. For Visual Studio 2005:
+ * Generate build files using CMake
+
+  e.g. Windows, Visual Studio 2005:
 
 	cd build
 	mkdir vs
 	cd vs
 	cmake .. -G"Visual Studio 8 2005"
 
- * Build the BUILD_ALL target in release mode
+ 	* Build the BUILD_ALL target in release mode
 
- * Build the INSTALL target
+ 	* Build the INSTALL target
 
+  e.g. Linix
+
+	cd build
+	mkdir vs
+	cd vs
+	cmake ..
+	make
+	make install
 
 Running Examples
 ----------------

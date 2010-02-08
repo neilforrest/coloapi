@@ -21,6 +21,8 @@ Compilation
 
  * Generate build files using CMake
 
+ * Refer to Trouble Shooting section below, if required
+
   e.g. Windows, Visual Studio 2005:
 
 	cd build
@@ -54,7 +56,7 @@ Running Examples
 
 	e.g.
 		cd examples
-		h3dload SimpleARTracking.x3d
+		H3DLoad SimpleARTracking.x3d
 
  * Use 'HIRO' marker on forehead to denote head position
 

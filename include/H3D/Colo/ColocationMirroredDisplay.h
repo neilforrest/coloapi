@@ -6,8 +6,8 @@
 
 namespace H3D
 {
-	/// Represents a visual display used for colocation which uses a mirror to reflect the image.
-	/// The parameters of the 'virtual'/reflected display are calculated from the position
+	/// \brief Represents a visual display used for colocation which uses a mirror to reflect the image.
+	/// \details The parameters of the 'virtual'/reflected display are calculated from the position
 	/// of the 'real' display and mirror
 	class COLO_API ColocationMirroredDisplay : public ColocationDisplay
 	{

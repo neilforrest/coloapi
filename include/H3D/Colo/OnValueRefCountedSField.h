@@ -9,8 +9,8 @@ namespace H3D
 {
 
 	/// \ingroup FieldTemplateModifiers
-	/// Field template modifier to call onValueChange() when field value changes
-	/// Equivalent to OnNewValueSField for RefCountedSField derived field types
+	/// \brief Field template modifier to call onValueChange() when field value changes
+	/// \details Equivalent to OnNewValueSField for RefCountedSField derived field types
 	template < typename RefCountedSFieldType >
 	class COLO_API OnNewValueSRefCountedField : public RefCountedSFieldType
 	{

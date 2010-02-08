@@ -6,8 +6,8 @@
 
 namespace H3D
 {
-	/// Represents a visual display used for colocation
-	/// Serves as a base class for all colocation displays
+	/// \brief Represents a visual display used for colocation
+	/// \details Serves as a base class for all colocation displays
 	/// Currently adds nothing to Plane base class appart from implementing defaultXMLContainerField()
 	class COLO_API ColocationDisplay : public Plane
 	{

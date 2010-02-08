@@ -58,6 +58,9 @@ Trouble Shooting
    Rebuild all of H3DAPI with your compiler if required.
 
  * ARToolkit installation location may have to be specified manually via CMake
+   Use the CMake GUI or run 'ccmake .' or edit CMakeCache.txt in order to define ARTOOLKIT_ROOT
+   Set ARTOOLKIT_ROOT to the ARToolkit installation directory (the one that contains 'include/' and 'lib/')
+   then run cmake again.
 
 
 SimpleARTracking.x3d

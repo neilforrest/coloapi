@@ -10,9 +10,11 @@ include(LibFindMacros)
 # Use pkg-config to get hints about paths
 libfind_pkg_check_modules(ARToolKit_PKGCONF ARToolKit)
 
-# TODO: Add linux/MacOSX install locations...
-SET(ARToolKit_INCLUDE_SEARCH_PATHS "C:/Program Files/ARToolkit/ARToolKit/include")
-SET(ARToolKit_LIB_SEARCH_PATHS "C:/Program Files/ARToolkit/ARToolKit/lib")
+SET(ARToolKit_INCLUDE_SEARCH_PATHS "${ARTOOLKIT_ROOT}/include"
+				   "C:/Program Files/ARToolkit/ARToolKit/include")
+
+SET(ARToolKit_LIB_SEARCH_PATHS 	"${ARTOOLKIT_ROOT}/lib" 
+				"C:/Program Files/ARToolkit/ARToolKit/lib")
 
 find_package(GLUT)
 

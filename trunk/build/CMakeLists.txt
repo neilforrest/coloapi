@@ -44,6 +44,10 @@ IF(ARToolKit_FOUND)
   SET(HAVE_ARTOOLKIT 1)
   INCLUDE_DIRECTORIES( ${ARToolKit_INCLUDE_DIRS} )
   SET(optionalLibs ${optionalLibs} ${ARToolKit_LIBRARIES} )
+ELSE(ARToolKit_FOUND)
+  IF(NOT DEFINED ARTOOLKIT_ROOT)
+    SET(ARTOOLKIT_ROOT "" CACHE PATH "Set this to the root directory of your ARToolkit installation (the dir that contains ./include and ./lib")
+  ENDIF(NOT DEFINED ARTOOLKIT_ROOT)
 ENDIF(ARToolKit_FOUND)
 
 #H3DAPI

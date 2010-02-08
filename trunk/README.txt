@@ -57,7 +57,8 @@ Trouble Shooting
  * ColoAPI must be built with same compiler and settings as H3DAPI, H3DLoad and H3DViewer. 
    Rebuild all of H3DAPI with your compiler if required.
 
- * ARToolkit installation location may have to be specified manually via CMake
+ * ARToolkit installation location may have to be specified manually via CMake.
+   By default we look for it at C:/Program Files/ARToolkit/
    Use the CMake GUI or run 'ccmake .' or edit CMakeCache.txt in order to define ARTOOLKIT_ROOT
    Set ARTOOLKIT_ROOT to the ARToolkit installation directory (the one that contains 'include/' and 'lib/')
    then run cmake again.

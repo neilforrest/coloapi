@@ -11,7 +11,7 @@
 	<!-- Import additional H3D nodes from ColoAPI -->
 	<ImportLibrary library="..\\bin\\ColoAPI" />			<!-- Windows -->
 	<ImportLibrary library="../lib/libColoAPI.dylib" />		<!-- MacOSX -->
-	<ImportLibrary library="../bin/ColoAPI.so" />			<!-- Linux/Unix -->
+	<ImportLibrary library="../lib/libColoAPI.so" />		<!-- Linux/Unix -->
 
 	<!-- Define properties of viewpoint -->
 	<!-- Edit viewpoint position to match viewer eye position (measured in m from centre of display -->

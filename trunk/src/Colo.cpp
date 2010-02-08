@@ -1,5 +1,6 @@
 #include <H3D/Colo/Colo.h>
 #include <sstream>
+#include <string.h>
 
 using namespace std;
 

@@ -11,10 +11,10 @@ include(LibFindMacros)
 libfind_pkg_check_modules(ARToolKit_PKGCONF ARToolKit)
 
 SET(ARToolKit_INCLUDE_SEARCH_PATHS "${ARTOOLKIT_ROOT}/include"
-				   "C:/Program Files/ARToolkit/ARToolKit/include")
+				   "C:/Program Files/ARToolkit/include")
 
 SET(ARToolKit_LIB_SEARCH_PATHS 	"${ARTOOLKIT_ROOT}/lib" 
-				"C:/Program Files/ARToolkit/ARToolKit/lib")
+				"C:/Program Files/ARToolKit/lib")
 
 find_package(GLUT)
 

@@ -1,3 +1,20 @@
+//  Copyright 2010, Neil Forrest
+//
+//  This file is part of ColoAPI.
+//
+//  ColoAPI is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU Lesser General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  ColoAPI is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU Lesser General Public License for more details.
+//
+//  You should have received a copy of the GNU Lesser General Public License
+//  along with ColoAPI.  If not, see <http://www.gnu.org/licenses/>.
+//
 #ifndef __COLO_H__
 #define __COLO_H__
 
@@ -35,7 +52,7 @@
 
 /// Undef if you do not have ARToolkit(http://www.hitl.washington.edu/artoolkit/) installed.
 /// Required for viewpoint headtracking via ARToolkit.
-/* #undef HAVE_ARTOOLKIT */
+#define HAVE_ARTOOLKIT
 
 #include <H3D/LibraryInfo.h>
 

@@ -9,38 +9,41 @@
   </head>
   <Scene>
 
-	<!-- Import additional H3D nodes from ColoAPI -->
-	<ImportLibrary library="..\\bin\\ColoAPI" />			<!-- Windows -->
-	<ImportLibrary library="../lib/libColoAPI.dylib" />		<!-- MacOSX -->
-	<ImportLibrary library="../lib/libColoAPI.so" />		<!-- Linux/Unix -->
+    <!-- Import additional H3D nodes from ColoAPI -->
+    <!-- Windows -->
+    <ImportLibrary library="..\\bin\\ColoAPI" />
+    <!-- MacOSX -->
+    <ImportLibrary library="../lib/libColoAPI.dylib" />
+    <!-- Linux/Unix -->
+    <ImportLibrary library="../lib/libColoAPI.so" />
 
-	<!-- Define tracking cameras used -->
-	<CameraInfo>
-		<!-- Camera placed at front of monitor support at centre -->
-		<!-- Edit position of camera (measured in m from center of monitor) -->
-		<ARToolKitCamera position='0 0.175 0 ' orientation='0 1 0 3.147' />
-	</CameraInfo>
+    <!-- Define tracking cameras used -->
+    <CameraInfo>
+      <!-- Camera placed at front of monitor support at centre -->
+      <!-- Edit position of camera (measured in m from center of monitor) -->
+      <ARToolKitCamera position='0 0.175 0 ' orientation='0 1 0 3.147' />
+    </CameraInfo>
 
-	<!-- Define properties of viewpoint -->
-	<MarkerViewpoint>
+    <!-- Define properties of viewpoint -->
+    <MarkerViewpoint>
 
-		<!-- The ARToolkit marker used for tracking head position -->
-		<ARToolKitMarker />
+      <!-- The ARToolkit marker used for tracking head position -->
+      <ARToolKitMarker />
 
-		<!-- Properties of the graphic display -->
-		<!-- Edit coords of 3 corners of monitor (measured in m from centre of monitor) -->
-		<ColocationDisplay 	topLeft='-0.165 0.105 0'
-			 			topRight='0.165 0.105 0'
-			 			bottomRight='0.165 -0.105 0' />
+      <!-- Properties of the graphic display -->
+      <!-- Edit coords of 3 corners of monitor (measured in m from centre of monitor) -->
+      <ColocationDisplay 	topLeft='-0.165 0.105 0'
+              topRight='0.165 0.105 0'
+              bottomRight='0.165 -0.105 0' />
 
-	</MarkerViewpoint>
+    </MarkerViewpoint>
 
-	<!-- Import model -->
-	<Inline url="./fish/Kumanomi.x3d" />
+    <!-- Import model -->
+    <Inline url="./fish/Kumanomi.x3d" />
 
-	<!-- Prepare environment for head tracking viewpoint -->
-	<!-- e.g. Disable followViewpoint on all haptic devices -->
-	<PythonScript url="initColo.py" />
+    <!-- Prepare environment for head tracking viewpoint -->
+    <!-- e.g. Disable followViewpoint on all haptic devices -->
+    <PythonScript url="initColo.py" />
 
   </Scene>
 </X3D>

@@ -62,10 +62,17 @@ void H3DMarker::UpdateTranslation::update ()
 // Field used to update average rotation from all rotations
 void H3DMarker::UpdateRotation::update ()
 {
-	//const MFRotation::vector_type& rotations= 
-	//	static_cast< MFRotation * >( routes_in[0] )->getValue();
-	
+	H3DMarker* owner= static_cast<H3DMarker*> (getOwner());
+	const MFRotation::vector_type& rotations= 
+		static_cast< MFRotation * >( routes_in[0] )->getValue();
+
 	// TODO: Calculate average rotation from rotations
+	// Currently we just use the rotation obtained from the first camera
+	if ( rotations.size() > 0 )
+	{
+		H3DCamera* cam= static_cast<H3DCamera*>((*CameraInfo::getActive ()->camera)[(*owner->camerasUsed)[0]]);
+		value= /*Rotation ( cam->getLocalToWorldMatrix().getRotationPart() */ rotations[0];// );
+	}
 }
 
 // Constructor

@@ -114,12 +114,14 @@ ColocationViewpoint::ColocationViewpoint (	Inst< SFSetBind >  _set_bind,
 											Inst< SFBool    >  _isBound,
 											Inst< SFMatrix4f > _accForwardMatrix,
 											Inst< SFMatrix4f > _accInverseMatrix,
-											Inst< UpdateDisplay >   _display ) :
+											Inst< UpdateDisplay >   _display,
+											Inst< SFRotation > _headOrientation ) :
 Viewpoint ( _set_bind,_centerOfRotation,
 		   _description,_fieldOfView,_jump,_metadata,
 		   _orientation,_position,_retainUserOffsets,
 		   _bindTime,_isBound,_accForwardMatrix,_accInverseMatrix ),
-		   display ( _display )
+		   display ( _display ),
+		   headOrientation ( _headOrientation )
 {
 	type_name = "ColocationViewpoint";
 	database.initFields( this );
@@ -131,8 +133,6 @@ void ColocationViewpoint::setupProjection(	EyeMode eye_mode,
 											H3DFloat clip_near, H3DFloat clip_far,
 											StereoInfo* stereo_info ) 
 {
-	// TODO: Tidy and optimize
-
 	// TODO: Devise more intellegent way of obtaining clipping planes?
 
 	// Define the shortest distance from the eye to the near clipping plane
@@ -147,9 +147,31 @@ void ColocationViewpoint::setupProjection(	EyeMode eye_mode,
 	const ColocationDisplay* colocationDisplay= display->getValue();
 
 	// The position of the camera
-	const Vec3f& eye= position->getValue();
+	Vec3f eye= position->getValue();
 
-	//Console(4) << "CollocationViewpoint: Eye position: " << eye << endl << endl;
+	// Stereo rendering parameter, which are used later, to cancel
+	// out fixed interocular translation made by H3DWindowNode
+	H3DFloat interocular_distance = (H3DFloat) 0.06;
+	Vec3f rightEyeOffset;
+
+	// Adjust eye position to match left or right eye if required by render mode
+	if ( eye_mode == LEFT_EYE || eye_mode == RIGHT_EYE )
+	{
+		if( !stereo_info )
+		  stereo_info = StereoInfo::getActive();
+
+		if( stereo_info )
+		  interocular_distance = stereo_info->interocularDistance->getValue();
+
+		// Calculate an offset vector for the right eye, and rotate to match the orientation of the viewpoint
+		rightEyeOffset= Matrix3f ( headOrientation->getValue() ) * Vec3f ( interocular_distance/2, 0, 0 );
+
+		// Adjust the eye position to match either left or right eye
+		if ( eye_mode == LEFT_EYE )
+			eye-= rightEyeOffset;
+		else if ( eye_mode == RIGHT_EYE )
+			eye+= rightEyeOffset;
+	}
 	
 	// The projection plane's normal
 	const Vec3f& displayNormal= colocationDisplay->normal->getValue();
@@ -181,17 +203,12 @@ void ColocationViewpoint::setupProjection(	EyeMode eye_mode,
 	
 	// Calculate the distance to the left side of the near plane:
 	left = NCPD*(Pleft/eyeToDisplay);
-	
-	//Console(4) << "NCPD*(Pleft/eyeToDisplay)=" << NCPD << "," << Pleft << "," << eyeToDisplay << endl;
-	
+		
 	//Calculate the distance to the right side of the projection plane from the PPP
 	H3DFloat Pright = (displayTopRight-eyeDisplayPoint).dotProduct(-displayLeft);
 	//Calculate the distance to the left side of the near plane:
 	right = NCPD*(Pright/eyeToDisplay);
 	
-	
-	//Console(4) << "NCPD*(Pright/eyeToDisplay)=" << NCPD << "," << Pright << "," << eyeToDisplay << endl;
-
 	//Calculate the distance to the top side of the projection plane from the PPP
 	H3DFloat Ptop = (displayTopLeft-eyeDisplayPoint).dotProduct(displayUp);
 	//Calculate the distance to the top side of the near plane:
@@ -203,7 +220,18 @@ void ColocationViewpoint::setupProjection(	EyeMode eye_mode,
 	bottom = NCPD*(Pbottom/eyeToDisplay);
 
 	glFrustum(-left,right,-bottom,top,NCPD,FCPD);
-	
-	//Console(4) << "ColocationDisplay" << *display->getValue() << endl;
-	//Console(4) << "glFrustum" << -left << ", " << right << ", " << -bottom << ", " << top << ", " << NCPD << ", " << FCPD << ", " << endl;
+
+	// Cancel out the fixed x-axis interocular translation made in H3DWindowNode
+	// since we perform our own interocular translation based on orientation
+	Vec3f adjust= Matrix3f ( orientation->getValue() ).inverse() * rightEyeOffset;
+	if ( eye_mode == RIGHT_EYE )
+	{
+		glTranslatef ( interocular_distance/2, 0, 0 );
+		glTranslatef ( -adjust.x, -adjust.y, -adjust.z );
+	}
+	else if ( eye_mode == LEFT_EYE )
+	{
+		glTranslatef ( -interocular_distance/2, 0, 0 );
+		glTranslatef ( adjust.x, adjust.y, adjust.z );
+	}
 }

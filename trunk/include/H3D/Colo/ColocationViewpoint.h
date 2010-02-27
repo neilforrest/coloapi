@@ -64,7 +64,8 @@ namespace H3D
 								Inst< SFBool    >	_isBound			= 0,
 								Inst< SFMatrix4f >	_accForwardMatrix	= 0,
 								Inst< SFMatrix4f >	_accInverseMatrix	= 0,
-								Inst< UpdateDisplay >	_display	= 0 );
+								Inst< UpdateDisplay >	_display		= 0,
+								Inst< SFRotation > _headOrientation		= 0);
 
 		/// Calculate and set the projection matrix
 		virtual void setupProjection( EyeMode eye_mode,
@@ -76,6 +77,13 @@ namespace H3D
 		/// 
 		/// <b>Access type:</b> inputOutput
 		auto_ptr < UpdateDisplay > display;
+
+		/// The orientation of the viewer's head
+		/// Since the 'orientation' field is used to set the actual orientation of the Viewpoint node, 
+		/// which is controlled by CollocationViewpoint to always be the opposite of the display normal,
+		/// we need another field to define the viewer's head orientation. 
+		/// This field is used to calculate the interocular offset based on head orientation.
+		auto_ptr < SFRotation > headOrientation;
 
 		/// Add this node to the H3DNodeDatabase system.
 		static H3DNodeDatabase database;

@@ -38,10 +38,16 @@ void MarkerViewpoint::UpdateMarker::onPreValueChange( H3DMarker* new_value )
 	MarkerViewpoint* markerViewpoint= static_cast<MarkerViewpoint*>(getOwner());
 	
 	if ( markerViewpoint->marker->getValue() )
+	{
 		markerViewpoint->marker->getValue()->translation->unroute ( markerViewpoint->position );
+		new_value->rotation->unroute ( markerViewpoint->headOrientation );
+	}
 	
 	if ( new_value )
+	{
 		new_value->translation->route ( markerViewpoint->position );
+		new_value->rotation->route ( markerViewpoint->headOrientation );
+	}
 }
 
 // Constructor

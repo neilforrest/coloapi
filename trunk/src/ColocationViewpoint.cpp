@@ -164,7 +164,7 @@ void ColocationViewpoint::setupProjection(	EyeMode eye_mode,
 		  interocular_distance = stereo_info->interocularDistance->getValue();
 
 		// Calculate an offset vector for the right eye, and rotate to match the orientation of the viewpoint
-		rightEyeOffset= Matrix3f ( headOrientation->getValue() ) * Vec3f ( interocular_distance/2, 0, 0 );
+    rightEyeOffset= Matrix3f ( headOrientation->getValue() ) * Vec3f ( interocular_distance/2, 0, 0 );
 
 		// Adjust the eye position to match either left or right eye
 		if ( eye_mode == LEFT_EYE )

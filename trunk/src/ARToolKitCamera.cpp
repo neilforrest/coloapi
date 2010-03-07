@@ -180,7 +180,7 @@ bool ARToolKitCamera::updateMarker ( const H3DMarker& marker, Vec3f& translation
 		translation= transform.getTranslationPart();
 		
 		// Set marker rotation
-		rotation= Rotation ( transform.getRotationPart() );
+    rotation= Rotation ( transform.getRotationPart().inverse() );
 		
 		return true;
 	}

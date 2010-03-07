@@ -39,6 +39,13 @@ namespace H3D
 			/// This function is called just before the value in the field is about to change 
 			virtual void onPreValueChange( H3DMarker* new_value );
 		};
+
+    /// \brief A specialized viewpoint position field used to calculate the final viewpoint
+    /// position from the marker position and the marker offset vector
+    class COLO_API ViewpointPosition: public TypedField < SFPosition, Types < SFVec3f, SFVec3f > >
+    {
+      virtual void update();
+    };
 		
 		/// Constructor
 		MarkerViewpoint (		Inst< SFSetBind >  _set_bind         = 0,
@@ -48,20 +55,24 @@ namespace H3D
 								Inst< SFBool    >  _jump             = 0,
 								Inst< SFNode    >  _metadata         = 0,
 								Inst< UpdateOrientation >  _orientation   = 0,
-								Inst< SFPosition >  _position         = 0,
+								Inst< ViewpointPosition >  _position         = 0,
 								Inst< SFBool    >  _retainUserOffsets = 0,
 								Inst< SFTime    >  _bindTime         = 0,
 								Inst< SFBool    >  _isBound          = 0,
 								Inst< SFMatrix4f > _accForwardMatrix = 0,
 								Inst< SFMatrix4f > _accInverseMatrix = 0,
 								Inst< UpdateDisplay >	_display = 0,
-								Inst< UpdateMarker >	_marker			 = 0 );
+								Inst< UpdateMarker >	_marker			 = 0,
+                Inst< SFVec3f > _markerOffset = 0 );
 
 		/// Override traverseSG() in order to traverse the contained marker and update position
 		virtual void traverseSG ( TraverseInfo& ti );
 
 		/// The H3DMarker node used to represent the position of the viewpoint
 		auto_ptr < UpdateMarker > marker;
+
+    /// The vector between the point between the eyes and the center of the marker
+    auto_ptr < SFVec3f > markerOffset;
 
 		/// Add this node to the H3DNodeDatabase system.
 		static H3DNodeDatabase database;

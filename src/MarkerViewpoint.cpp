@@ -50,6 +50,17 @@ void MarkerViewpoint::UpdateMarker::onPreValueChange( H3DMarker* new_value )
 	}
 }
 
+// This function is called when the value in the field has changed. 
+void MarkerViewpoint::ViewpointPosition::update()
+{
+  SFPosition::update();
+
+  const Vec3f& markerOffset= static_cast<SFVec3f*>(routes_in[0])->getValue();
+  const Vec3f& markerPos= static_cast<SFVec3f*>(routes_in[1])->getValue();
+
+  value= markerPos - markerOffset;
+}
+
 // Constructor
 MarkerViewpoint::MarkerViewpoint (	Inst< SFSetBind >  _set_bind,
 									Inst< SFVec3f   >  _centerOfRotation,
@@ -58,22 +69,28 @@ MarkerViewpoint::MarkerViewpoint (	Inst< SFSetBind >  _set_bind,
 									Inst< SFBool    >  _jump,
 									Inst< SFNode    >  _metadata,
 									Inst< UpdateOrientation >  _orientation,
-									Inst< SFPosition >  _position,
+									Inst< ViewpointPosition >  _position,
 									Inst< SFBool    >  _retainUserOffsets,
 									Inst< SFTime    >  _bindTime,
 									Inst< SFBool    >  _isBound,
 									Inst< SFMatrix4f > _accForwardMatrix,
 									Inst< SFMatrix4f > _accInverseMatrix,
 									Inst< UpdateDisplay >	_display,
-									Inst< UpdateMarker >	_marker ) :
+									Inst< UpdateMarker >	_marker,
+                  Inst< SFVec3f > _markerOffset ) :
 ColocationViewpoint ( _set_bind,_centerOfRotation,
 		   _description,_fieldOfView,_jump,_metadata,
 		   _orientation,_position,_retainUserOffsets,
 		   _bindTime,_isBound,_accForwardMatrix,_accInverseMatrix, _display ),
-		   marker ( _marker )
+		   marker ( _marker ),
+       markerOffset ( _markerOffset )
 {
 	type_name = "MarkerViewpoint";
 	database.initFields( this );
+
+  markerOffset->route ( position );
+
+  markerOffset->setValue ( Vec3f ( 0, 0.1, 0 ) );
 }
 
 // Override traverseSG() in order to traverse the contained marker

@@ -46,8 +46,12 @@
 
 	</MarkerViewpoint>
 
-	<!-- Import model -->
-	<Inline url="./fish/Kumanomi.x3d" />
+	<Transform translation='0 0.05 -0.05' >
+
+		<!-- Import model -->
+		<Inline url="./fish/Kumanomi.x3d" />
+
+	</Transform>
 
 	<!-- Prepare environment for head tracking viewpoint -->
 	<!-- e.g. Disable followViewpoint on all haptic devices -->
